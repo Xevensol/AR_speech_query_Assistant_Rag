@@ -11,7 +11,7 @@ from langchain_core.output_parsers import StrOutputParser
 from langchain_core.runnables import  RunnablePassthrough, RunnableParallel
 from langchain.prompts import ChatPromptTemplate
 from langchain_openai import ChatOpenAI
-from langchain_community.document_loaders import PyMuPDFLoader, Docx2txtLoader
+from langchain_community.document_loaders import PyMuPDFLoader, Docx2txtLoader, TextLoader
 from langchain_community.document_loaders.csv_loader import CSVLoader
 from dotenv import load_dotenv
 load_dotenv()
@@ -38,6 +38,9 @@ def upload_file_and_preprosses():
                 elif file_extension == "docx":
                     file_loader = Docx2txtLoader(file_path)
                     pages = file_loader.load()
+                elif file_extension == "txt":
+                    loader = TextLoader(file_path)
+                    pages = loader.load()
                 else:
                     st.error("Unsupported file format.")
 
