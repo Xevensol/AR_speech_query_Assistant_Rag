@@ -52,10 +52,10 @@ st.markdown('<div class="description">Upload a document file and click on the Su
 result = upload_file_and_preprosses()
 
 # Transcribe voice to text (if needed)
-def transcribe_voice_to_text(audio_location):
-    client = OpenAI(api_key=API_KEY)
-    with open(audio_location, "rb") as audio_file:
-        transcript = client.audio.transcriptions.create(model="whisper-1", file=audio_file)
+def transcribe_voice_to_text(audio_location,language='ur'):
+    client = OpenAI()
+    with open(audio_location, "rb") as audio_location:
+        transcript = client.audio.transcriptions.create(model="whisper-1",language=language ,file= audio_location)
     return transcript.text
 
 def chat_completion_call(text):
